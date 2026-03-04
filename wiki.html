@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Chronicle — Game Wiki</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --parchment: #f4ead5;
+      --parchment-dark: #e8d9b8;
+      --ink: #1c1409;
+      --ink-light: #3d2e10;
+      --gold: #b8860b;
+      --gold-light: #d4a017;
+      --gold-bright: #f0c040;
+      --crimson: #7a1c1c;
+      --crimson-light: #a02020;
+      --stone: #5a5040;
+      --stone-light: #8a7a60;
+      --shadow: rgba(28,20,9,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background-color: #1a1208;
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(184,134,11,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(122,28,28,0.07) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      color: var(--ink);
+    }
+
+    /* ── HEADER ── */
+    #site-header {
+      background: linear-gradient(180deg, #0e0b05 0%, #1e1508 60%, #2a1e0a 100%);
+      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 4px 32px rgba(184,134,11,0.25);
+      padding: 0 2rem;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      max-width: 1300px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; padding: 0.6rem 0;
+    }
+    .site-logo {
+      display: flex; align-items: center; gap: 0.9rem;
+      text-decoration: none;
+    }
+    .logo-emblem {
+      width: 52px; height: 52px; flex-shrink: 0;
+    }
+    .site-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--gold-bright);
+      text-shadow: 0 0 18px rgba(240,192,64,0.5), 0 2px 4px #000;
+      letter-spacing: 0.04em; line-height: 1.1;
+    }
+    .site-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem; color: var(--stone-light);
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .header-search {
+      display: flex; align-items: center;
+      background: rgba(244,234,213,0.07);
+      border: 1px solid rgba(184,134,11,0.3);
+      border-radius: 3px; overflow: hidden;
+      flex: 0 1 320px;
+    }
+    .header-search input {
+      background: none; border: none; outline: none;
+      color: var(--parchment); font-family: 'EB Garamond', serif;
+      font-size: 0.95rem; padding: 0.45rem 0.75rem; width: 100%;
+    }
+    .header-search input::placeholder { color: var(--stone-light); }
+    .header-search button {
+      background: var(--gold); border: none; cursor: pointer;
+      padding: 0.45rem 0.75rem; color: var(--ink); font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .header-search button:hover { background: var(--gold-bright); }
+    nav.main-nav { display: flex; gap: 0.2rem; }
+    nav.main-nav a {
+      font-family: 'Cinzel', serif; font-size: 0.78rem;
+      color: var(--parchment-dark); text-decoration: none;
+      padding: 0.4rem 0.75rem; border-radius: 2px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s, background 0.2s;
+    }
+    nav.main-nav a:hover, nav.main-nav a.active {
+      color: var(--gold-bright); background: rgba(184,134,11,0.12);
+    }
+
+    /* ── LAYOUT ── */
+    #app { max-width: 1300px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .page { display: none; }
+    .page.active { display: block; animation: fadeIn 0.35s ease; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      font-family: 'Cinzel', serif; font-size: 0.75rem;
+      color: var(--stone-light); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .breadcrumb a { color: var(--gold); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--gold-bright); }
+    .breadcrumb span { color: var(--stone-light); }
+
+    /* ── PARCHMENT CARD ── */
+    .parchment {
+      background: var(--parchment);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23p)' opacity='0.06'/%3E%3C/svg%3E"),
+        linear-gradient(160deg, #fdf5e0 0%, #f0e0bb 50%, #e8d4a8 100%);
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      box-shadow: 0 4px 32px var(--shadow), inset 0 0 60px rgba(184,134,11,0.05);
+      padding: 2rem 2.5rem;
+      position: relative;
+    }
+    .parchment::before, .parchment::after {
+      content: ''; position: absolute;
+      width: 28px; height: 28px;
+      background: radial-gradient(circle at center, var(--gold) 30%, transparent 70%);
+      opacity: 0.35;
+    }
+    .parchment::before { top: 10px; left: 10px; }
+    .parchment::after { bottom: 10px; right: 10px; }
+
+    /* ── DIVIDER ── */
+    .ornate-divider {
+      text-align: center; margin: 1.5rem 0;
+      color: var(--gold); font-size: 1.2rem; letter-spacing: 0.5rem;
+      opacity: 0.6;
+    }
+    .ornate-divider::before, .ornate-divider::after {
+      content: ''; display: inline-block;
+      width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      vertical-align: middle; margin: 0 0.75rem;
+    }
+
+    /* ════════════════════════════════
+       HOME PAGE
+    ════════════════════════════════ */
+    .home-hero {
+      text-align: center; padding: 3.5rem 2rem;
+      background: linear-gradient(180deg, #0e0b05 0%, #1c1408 100%);
+      border: 1px solid rgba(184,134,11,0.3);
+      border-radius: 2px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.5), inset 0 0 80px rgba(184,134,11,0.05);
+      margin-bottom: 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .home-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(184,134,11,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      color: var(--gold-bright);
+      text-shadow: 0 0 30px rgba(240,192,64,0.5), 0 4px 8px #000;
+      margin-bottom: 0.5rem; position: relative;
+    }
+    .hero-subtitle {
+      font-family: 'Cinzel', serif; font-size: 1rem;
+      color: var(--stone-light); letter-spacing: 0.25em;
+      text-transform: uppercase; margin-bottom: 1.8rem;
+    }
+    .hero-desc {
+      font-size: 1.15rem; color: var(--parchment-dark);
+      max-width: 560px; margin: 0 auto 2rem; line-height: 1.7;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    }
+    .btn {
+      font-family: 'Cinzel', serif; font-size: 0.85rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.65rem 1.8rem; border-radius: 2px;
+      cursor: pointer; text-decoration: none; border: none;
+      transition: all 0.25s; display: inline-block;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-bright) 60%, var(--gold) 100%);
+      color: var(--ink); box-shadow: 0 2px 16px rgba(184,134,11,0.4);
+    }
+    .btn-gold:hover { box-shadow: 0 4px 28px rgba(240,192,64,0.55); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--parchment);
+      border: 1px solid rgba(244,234,213,0.35);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-bright); background: rgba(184,134,11,0.08); }
+
+    /* Categories grid */
+    .section-title {
+      font-family: 'Cinzel', serif; font-size: 1.1rem;
+      color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.25rem; font-weight: 600;
+    }
+    .section-title-dark {
+      font-family: 'Cinzel', serif; font-size: 1.1rem;
+      color: var(--gold-bright); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.25rem; font-weight: 600;
+    }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .cat-card {
+      background: linear-gradient(135deg, #1e1508 0%, #2a1e0a 100%);
+      border: 1px solid rgba(184,134,11,0.25);
+      border-radius: 2px; padding: 1.4rem 1.2rem;
+      text-decoration: none; color: inherit;
+      transition: all 0.25s; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.6rem; text-align: center;
+    }
+    .cat-card:hover {
+      border-color: var(--gold); background: linear-gradient(135deg, #2a1e0a 0%, #3a2a10 100%);
+      transform: translateY(-2px); box-shadow: 0 6px 24px rgba(184,134,11,0.2);
+    }
+    .cat-icon { font-size: 2rem; }
+    .cat-name {
+      font-family: 'Cinzel', serif; font-size: 0.85rem;
+      color: var(--gold-bright); letter-spacing: 0.08em; font-weight: 600;
+    }
+    .cat-count { font-size: 0.8rem; color: var(--stone-light); }
+
+    /* Recent articles */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+    .article-list { list-style: none; }
+    .article-list li {
+      border-bottom: 1px solid rgba(184,134,11,0.15);
+      padding: 0.75rem 0;
+    }
+    .article-list li:last-child { border-bottom: none; }
+    .article-list a {
+      font-family: 'Cinzel', serif; font-size: 0.9rem;
+      color: var(--ink-light); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .article-list a:hover { color: var(--crimson); }
+    .article-list .meta {
+      font-size: 0.78rem; color: var(--stone-light); margin-top: 0.15rem;
+    }
+
+    /* ════════════════════════════════
+       CATEGORY PAGE
+    ════════════════════════════════ */
+    .category-header {
+      display: flex; align-items: flex-start; gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .category-icon-lg {
+      font-size: 3.5rem; flex-shrink: 0;
+      filter: drop-shadow(0 2px 8px rgba(184,134,11,0.3));
+    }
+    .category-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--crimson); margin-bottom: 0.3rem;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+    }
+    .category-desc { font-size: 1rem; line-height: 1.7; color: var(--ink-light); }
+
+    .entry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem; margin-top: 1.5rem;
+    }
+    .entry-card {
+      background: linear-gradient(160deg, #fdf5e0 0%, #eedfc0 100%);
+      border: 1px solid var(--gold); border-radius: 2px;
+      padding: 1.2rem 1.3rem; cursor: pointer;
+      transition: all 0.25s; position: relative;
+    }
+    .entry-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px var(--shadow);
+      border-color: var(--crimson);
+    }
+    .entry-card-title {
+      font-family: 'Cinzel', serif; font-size: 1rem;
+      color: var(--crimson); font-weight: 600; margin-bottom: 0.4rem;
+    }
+    .entry-card-excerpt {
+      font-size: 0.88rem; color: var(--ink-light); line-height: 1.5;
+    }
+    .entry-card-tag {
+      display: inline-block; margin-top: 0.6rem;
+      font-family: 'Cinzel', serif; font-size: 0.68rem;
+      color: var(--stone); letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--stone-light); padding: 0.1rem 0.45rem; border-radius: 2px;
+    }
+
+    /* ════════════════════════════════
+       ARTICLE PAGE
+    ════════════════════════════════ */
+    .article-layout {
+      display: grid; grid-template-columns: 1fr 280px; gap: 2rem;
+    }
+    @media (max-width: 900px) { .article-layout { grid-template-columns: 1fr; } }
+
+    .article-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      color: var(--crimson); margin-bottom: 0.5rem;
+      line-height: 1.2;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+    }
+    .article-meta {
+      font-family: 'Cinzel', serif; font-size: 0.75rem;
+      color: var(--stone-light); letter-spacing: 0.08em;
+      margin-bottom: 1.5rem; display: flex; gap: 1.2rem; flex-wrap: wrap;
+    }
+    .article-body { font-size: 1.05rem; line-height: 1.85; color: var(--ink); }
+    .article-body p { margin-bottom: 1.1rem; }
+    .article-body h2 {
+      font-family: 'Cinzel', serif; font-size: 1.2rem;
+      color: var(--crimson); margin: 2rem 0 0.75rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid rgba(122,28,28,0.2);
+    }
+    .article-body h3 {
+      font-family: 'Cinzel', serif; font-size: 1rem;
+      color: var(--ink-light); margin: 1.5rem 0 0.5rem;
+    }
+    .article-body ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .article-body li { margin-bottom: 0.35rem; }
+    .article-body blockquote {
+      border-left: 3px solid var(--gold);
+      padding: 0.5rem 1rem; margin: 1.5rem 0;
+      background: rgba(184,134,11,0.06);
+      font-style: italic; color: var(--ink-light);
+    }
+
+    /* Infobox */
+    .infobox {
+      background: linear-gradient(160deg, #fdf5e0 0%, #eedfc0 100%);
+      border: 2px solid var(--gold); border-radius: 2px;
+      overflow: hidden; font-size: 0.88rem;
+    }
+    .infobox-title {
+      background: linear-gradient(135deg, var(--crimson) 0%, var(--crimson-light) 100%);
+      color: #fff; font-family: 'Cinzel', serif;
+      font-size: 0.9rem; font-weight: 700;
+      text-align: center; padding: 0.6rem 1rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .infobox-image {
+      width: 100%; height: 160px;
+      background: linear-gradient(135deg, #2a1e0a 0%, #1a0e04 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+    }
+    .infobox table { width: 100%; border-collapse: collapse; }
+    .infobox td {
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid rgba(184,134,11,0.15);
+      vertical-align: top;
+    }
+    .infobox td:first-child {
+      font-family: 'Cinzel', serif; font-size: 0.75rem;
+      font-weight: 700; color: var(--stone); white-space: nowrap;
+      letter-spacing: 0.04em; width: 40%;
+    }
+    .infobox td:last-child { color: var(--ink-light); }
+
+    /* Sidebar */
+    .sidebar-widget {
+      background: linear-gradient(160deg, #fdf5e0 0%, #eedfc0 100%);
+      border: 1px solid var(--gold); border-radius: 2px;
+      padding: 1.2rem; margin-bottom: 1.2rem;
+    }
+    .sidebar-widget-title {
+      font-family: 'Cinzel', serif; font-size: 0.8rem;
+      color: var(--crimson); font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.75rem; padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(122,28,28,0.2);
+    }
+    .toc { list-style: none; }
+    .toc li { margin-bottom: 0.3rem; }
+    .toc a {
+      font-family: 'Cinzel', serif; font-size: 0.8rem;
+      color: var(--ink-light); text-decoration: none;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: var(--crimson); }
+    .toc a::before { content: '§'; color: var(--gold); font-size: 0.7rem; }
+
+    .related-list { list-style: none; }
+    .related-list li { margin-bottom: 0.4rem; }
+    .related-list a {
+      font-size: 0.88rem; color: var(--crimson);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .related-list a:hover { color: var(--crimson-light); text-decoration: underline; }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
+    .tag {
+      font-family: 'Cinzel', serif; font-size: 0.72rem;
+      border: 1px solid var(--stone-light); color: var(--stone);
+      padding: 0.18rem 0.55rem; border-radius: 2px;
+      letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tag:hover { border-color: var(--crimson); color: var(--crimson); }
+
+    /* ════════════════════════════════
+       SEARCH PAGE
+    ════════════════════════════════ */
+    .search-hero {
+      background: linear-gradient(160deg, #fdf5e0 0%, #eedfc0 100%);
+      border: 1px solid var(--gold); padding: 2rem 2.5rem;
+      margin-bottom: 2rem; border-radius: 2px;
+    }
+    .search-bar-lg {
+      display: flex; margin-top: 1rem;
+      border: 2px solid var(--gold); border-radius: 2px; overflow: hidden;
+    }
+    .search-bar-lg input {
+      flex: 1; padding: 0.75rem 1rem;
+      font-family: 'EB Garamond', serif; font-size: 1.1rem;
+      border: none; outline: none; background: var(--parchment);
+      color: var(--ink);
+    }
+    .search-bar-lg button {
+      background: var(--gold); border: none; padding: 0.75rem 1.5rem;
+      font-family: 'Cinzel', serif; font-size: 0.85rem;
+      letter-spacing: 0.08em; cursor: pointer; color: var(--ink);
+      transition: background 0.2s;
+    }
+    .search-bar-lg button:hover { background: var(--gold-bright); }
+    .search-result {
+      border-bottom: 1px solid rgba(184,134,11,0.2);
+      padding: 1.2rem 0;
+    }
+    .search-result:last-child { border-bottom: none; }
+    .search-result h3 {
+      font-family: 'Cinzel', serif; font-size: 1rem;
+      color: var(--crimson); margin-bottom: 0.25rem; cursor: pointer;
+    }
+    .search-result h3:hover { text-decoration: underline; }
+    .search-result p { font-size: 0.9rem; color: var(--ink-light); line-height: 1.6; }
+    .search-result .tag { margin-top: 0.4rem; }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      background: linear-gradient(180deg, #1a1208 0%, #0e0b05 100%);
+      border-top: 2px solid rgba(184,134,11,0.3);
+      padding: 2.5rem 2rem 1.5rem;
+      margin-top: 3rem;
+    }
+    .footer-inner {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem; margin-bottom: 2rem;
+    }
+    @media (max-width: 800px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    .footer-brand .site-title { font-size: 1rem; margin-bottom: 0.5rem; display: block; }
+    .footer-brand p { font-size: 0.85rem; color: var(--stone-light); line-height: 1.6; }
+    .footer-col h4 {
+      font-family: 'Cinzel', serif; font-size: 0.8rem;
+      color: var(--gold); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.4rem; }
+    .footer-col a {
+      font-size: 0.85rem; color: var(--stone-light);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--gold-bright); }
+    .footer-bottom {
+      text-align: center; font-size: 0.78rem; color: var(--stone-light);
+      border-top: 1px solid rgba(184,134,11,0.15); padding-top: 1.2rem;
+      font-family: 'Cinzel', serif; letter-spacing: 0.06em;
+    }
+
+    /* ── scrollbar ── */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0e0b05; }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+    /* ── responsive nav ── */
+    @media (max-width: 768px) {
+      nav.main-nav { display: none; }
+      .header-search { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header id="site-header">
+  <div class="header-inner">
+    <a class="site-logo" onclick="showPage('home')" style="cursor:pointer">
+      <svg class="logo-emblem" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="30,4 56,18 56,42 30,56 4,42 4,18" fill="none" stroke="#b8860b" stroke-width="1.5"/>
+        <polygon points="30,10 50,21 50,39 30,50 10,39 10,21" fill="none" stroke="#d4a017" stroke-width="0.8" opacity="0.5"/>
+        <text x="30" y="36" text-anchor="middle" font-family="serif" font-size="22" fill="#f0c040">⚔</text>
+      </svg>
+      <div>
+        <div class="site-title">The Chronicle</div>
+        <div class="site-subtitle">Official Game Wiki</div>
+      </div>
+    </a>
+    <div class="header-search">
+      <input type="text" placeholder="Search the wiki…" id="searchInput" onkeydown="if(event.key==='Enter')showPage('search')"/>
+      <button onclick="showPage('search')">🔍</button>
+    </div>
+    <nav class="main-nav">
+      <a onclick="showPage('home')" class="active" id="nav-home">Home</a>
+      <a onclick="showPage('category')" id="nav-category">Bestiary</a>
+      <a onclick="showPage('article')" id="nav-article">Articles</a>
+      <a onclick="showPage('search')" id="nav-search">Search</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main id="app">
+
+  <!-- ─────────── HOME PAGE ─────────── -->
+  <div class="page active" id="page-home">
+    <div class="home-hero">
+      <div class="hero-title">The Chronicle</div>
+      <div class="hero-subtitle">⚜ The Complete Knowledge of the Realm ⚜</div>
+      <p class="hero-desc">
+        A compendium of lore, bestiary, items, and maps spanning the known world. From the frozen peaks of Drakenmoor to the sunken vaults of Oldengard.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" onclick="showPage('category')">Browse Bestiary</a>
+        <a class="btn btn-outline" onclick="showPage('search')">Search Wiki</a>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <p class="section-title-dark">📚 Browse by Category</p>
+    <div class="categories-grid">
+      <div class="cat-card" onclick="showPage('category')">
+        <div class="cat-icon">🐉</div>
+        <div class="cat-name">Bestiary</div>
+        <div class="cat-count">142 creatures</div>
+      </div>
+      <div class="cat-card" onclick="showPage('category')">
+        <div class="cat-icon">⚔️</div>
+        <div class="cat-name">Weapons</div>
+        <div class="cat-count">87 entries</div>
+      </div>
+      <div class="cat-card" onclick="showPage('category')">
+        <div class="cat-icon">🏰</div>
+        <div class="cat-name">Locations</div>
+        <div class="cat-count">63 places</div>
+      </div>
+      <div class="cat-card" onclick="showPage('category')">
+        <div class="cat-icon">🧙</div>
+        <div class="cat-name">Characters</div>
+        <div class="cat-count">211 souls</div>
+      </div>
+      <div class="cat-card" onclick="showPage('category')">
+        <div class="cat-icon">📜</div>
+        <div class="cat-name">Lore & History</div>
+        <div class="cat-count">55 scrolls</div>
+      </div>
+      <div class="cat-card" onclick="showPage('category')">
+        <div class="cat-icon">🧪</div>
+        <div class="cat-name">Alchemy</div>
+        <div class="cat-count">39 recipes</div>
+      </div>
+    </div>
+
+    <!-- Recent + Featured -->
+    <div class="two-col">
+      <div class="parchment">
+        <p class="section-title">🕯 Recently Updated</p>
+        <ul class="article-list">
+          <li>
+            <a onclick="showPage('article')">The Wyvern of Ashenhollow</a>
+            <div class="meta">Bestiary · Updated 2 days ago</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">Sword of the Pale King</a>
+            <div class="meta">Weapons · Updated 3 days ago</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">Oldengard — Sunken City</a>
+            <div class="meta">Locations · Updated 5 days ago</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">Alaric the Undying</a>
+            <div class="meta">Characters · Updated 1 week ago</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">Dragonblood Elixir</a>
+            <div class="meta">Alchemy · Updated 1 week ago</div>
+          </li>
+        </ul>
+      </div>
+      <div class="parchment">
+        <p class="section-title">⭐ Featured Articles</p>
+        <ul class="article-list">
+          <li>
+            <a onclick="showPage('article')">The Age of Shattered Crowns</a>
+            <div class="meta">Lore & History</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">Grimoire of the Void Mages</a>
+            <div class="meta">Lore & History</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">The Iron Covenant</a>
+            <div class="meta">Factions</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">Drakenmoor Mountains</a>
+            <div class="meta">Locations</div>
+          </li>
+          <li>
+            <a onclick="showPage('article')">Runeforging Guide</a>
+            <div class="meta">Crafting</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────── CATEGORY PAGE ─────────── -->
+  <div class="page" id="page-category">
+    <div class="breadcrumb">
+      <a onclick="showPage('home')">Home</a>
+      <span>›</span>
+      <span>Bestiary</span>
+    </div>
+    <div class="parchment">
+      <div class="category-header">
+        <div class="category-icon-lg">🐉</div>
+        <div>
+          <div class="category-title">Bestiary</div>
+          <div class="category-desc">
+            A complete catalogue of the creatures that roam the realm — from the lowly Bograt of the Ashfen marshes to the ancient Worldserpent that sleeps beneath the Cradle Sea. Each entry details weaknesses, loot, and lore gathered by hunters and scholars alike.
+          </div>
+        </div>
+      </div>
+      <div class="ornate-divider">✦ ✦ ✦</div>
+      <p class="section-title">All Creatures <span style="font-weight:400;color:var(--stone-light);font-size:0.85rem;">(142 entries)</span></p>
+      <div class="entry-grid">
+        <div class="entry-card" onclick="showPage('article')">
+          <div class="entry-card-title">🐺 Duskwolf</div>
+          <div class="entry-card-excerpt">Pack predators native to the Wolfmere Forest. Highly intelligent, they coordinate ambushes with eerie precision.</div>
+          <span class="entry-card-tag">Beast</span>
+        </div>
+        <div class="entry-card" onclick="showPage('article')">
+          <div class="entry-card-title">🕷 Ironspider</div>
+          <div class="entry-card-excerpt">Enormous arachnids whose legs are reinforced with natural iron deposits. Found in the deep mines of Coppergate.</div>
+          <span class="entry-card-tag">Aberration</span>
+        </div>
+        <div class="entry-card" onclick="showPage('article')">
+          <div class="entry-card-title">🐉 Wyvern of Ashenhollow</div>
+          <div class="entry-card-excerpt">A fearsome winged reptile that nests in dormant volcanoes, breathing a toxic ash cloud over its prey.</div>
+          <span class="entry-card-tag">Dragon-kin</span>
+        </div>
+        <div class="entry-card" onclick="showPage('article')">
+          <div class="entry-card-title">💀 Plague Wraith</div>
+          <div class="entry-card-excerpt">Undead spirits born from battlefield pestilence. Their touch spreads the Black Rot to the living.</div>
+          <span class="entry-card-tag">Undead</span>
+        </div>
+        <div class="entry-card" onclick="showPage('article')">
+          <div class="entry-card-title">🦅 Stormtalon</div>
+          <div class="entry-card-excerpt">Massive raptors that nest at the peaks of Drakenmoor, riding lightning currents to strike from above.</div>
+          <span class="entry-card-tag">Beast</span>
+        </div>
+        <div class="entry-card" onclick="showPage('article')">
+          <div class="entry-card-title">🧟 Barrow King</div>
+          <div class="entry-card-excerpt">An ancient warlord bound to eternal undeath, ruling lesser undead from his sunken throne in the Ashfen.</div>
+          <span class="entry-card-tag">Boss · Undead</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────── ARTICLE PAGE ─────────── -->
+  <div class="page" id="page-article">
+    <div class="breadcrumb">
+      <a onclick="showPage('home')">Home</a>
+      <span>›</span>
+      <a onclick="showPage('category')">Bestiary</a>
+      <span>›</span>
+      <span>Wyvern of Ashenhollow</span>
+    </div>
+    <div class="article-layout">
+      <!-- Main content -->
+      <div class="parchment">
+        <h1 class="article-title">Wyvern of Ashenhollow</h1>
+        <div class="article-meta">
+          <span>📂 Bestiary / Dragon-kin</span>
+          <span>🕯 Updated: March 2026</span>
+          <span>👁 4,821 views</span>
+        </div>
+        <div class="ornate-divider">⚜</div>
+        <div class="article-body">
+          <p>
+            The <strong>Wyvern of Ashenhollow</strong> is a large draconic predator endemic to the volcanic highlands of the Ashenhollow region, northeast of the Cradle Sea. Unlike its true dragon cousins, a Wyvern possesses only two legs and relies on its powerful wings as forelimbs, granting it extraordinary aerial agility at the cost of ground stability.
+          </p>
+
+          <h2>Description</h2>
+          <p>
+            Adults measure roughly eighteen feet from snout to tail-tip, with a wingspan approaching forty feet. Their scales shift between charcoal grey and deep crimson depending on body temperature — a reliable indicator of imminent breath attack. The eyes are amber-gold and capable of seeing clearly through volcanic ash clouds.
+          </p>
+          <blockquote>
+            "Do not mistake the silence of its approach for mercy. The Wyvern stills its wings only when it has already chosen you as prey." — <em>Aldric of the Hunters' Compact, Field Notes Vol. III</em>
+          </blockquote>
+
+          <h2>Behaviour</h2>
+          <p>
+            Wyverns are solitary and fiercely territorial. A single specimen may claim a range of fifty square leagues around its nest-caldera. They are primarily nocturnal hunters, though volcanic activity or encroachment on their territory will provoke daytime aggression. Younger wyverns are far more erratic and dangerous in their aggression than elder specimens, who have learned patience.
+          </p>
+
+          <h2>Combat</h2>
+          <p>Hunters facing a Wyvern should be prepared for three primary attack patterns:</p>
+          <ul>
+            <li><strong>Ash Shroud</strong> — exhales a billowing cloud of toxic ash, obscuring vision and poisoning the lungs. Move upwind immediately.</li>
+            <li><strong>Tail Sweep</strong> — uses its barbed tail as a flail in a wide arc. The barbs carry paralytic venom; even a graze can immobilise a limb.</li>
+            <li><strong>Dive Strike</strong> — climbs to high altitude then folds wings into a near-vertical plunge, striking with full body weight.</li>
+          </ul>
+
+          <h2>Weaknesses</h2>
+          <p>
+            The underbelly scales are significantly thinner than the dorsal armour. Ice-aligned weapons deal bonus damage, and the creature is notably sluggish in cold weather. Its eyes are sensitive to bright light — a Sunburst sigil or Flash Flask will stagger it momentarily, creating an opening.
+          </p>
+
+          <h2>Loot</h2>
+          <p>
+            Slain Wyverns may yield <em>Ashen Scale</em> (crafting material), <em>Wyvern Barb</em> (alchemical reagent), <em>Ember Heart</em> (rare drop, required for Dragonblood Elixir), and <em>Wyvern Wing Membrane</em> (used in advanced gliding gear).
+          </p>
+        </div>
+        <div class="tags">
+          <span class="tag">Dragon-kin</span>
+          <span class="tag">Boss</span>
+          <span class="tag">Ashenhollow</span>
+          <span class="tag">Venomous</span>
+          <span class="tag">Flying</span>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="infobox">
+          <div class="infobox-title">Wyvern of Ashenhollow</div>
+          <div class="infobox-image">🐉</div>
+          <table>
+            <tr><td>Type</td><td>Dragon-kin</td></tr>
+            <tr><td>Region</td><td>Ashenhollow Highlands</td></tr>
+            <tr><td>Threat Level</td><td>⚠️ Extreme</td></tr>
+            <tr><td>Health</td><td>4,800 HP</td></tr>
+            <tr><td>Weakness</td><td>Ice, Bright Light</td></tr>
+            <tr><td>Resistance</td><td>Fire, Poison</td></tr>
+            <tr><td>Drops</td><td>Ashen Scale, Ember Heart</td></tr>
+            <tr><td>XP Reward</td><td>3,200 XP</td></tr>
+          </table>
+        </div>
+
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">Table of Contents</div>
+          <ul class="toc">
+            <li><a href="#">Description</a></li>
+            <li><a href="#">Behaviour</a></li>
+            <li><a href="#">Combat</a></li>
+            <li><a href="#">Weaknesses</a></li>
+            <li><a href="#">Loot</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-widget">
+          <div class="sidebar-widget-title">Related Articles</div>
+          <ul class="related-list">
+            <li><a onclick="showPage('article')">Dragonblood Elixir</a></li>
+            <li><a onclick="showPage('article')">Ashenhollow Region</a></li>
+            <li><a onclick="showPage('article')">Ember Heart (item)</a></li>
+            <li><a onclick="showPage('article')">Hunters' Compact</a></li>
+            <li><a onclick="showPage('article')">Dragon-kin (category)</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ─────────── SEARCH PAGE ─────────── -->
+  <div class="page" id="page-search">
+    <div class="breadcrumb">
+      <a onclick="showPage('home')">Home</a>
+      <span>›</span>
+      <span>Search</span>
+    </div>
+    <div class="search-hero">
+      <p class="section-title">🔍 Search the Wiki</p>
+      <div class="search-bar-lg">
+        <input type="text" placeholder="Search creatures, items, locations, lore…" value="wyvern"/>
+        <button>Search</button>
+      </div>
+    </div>
+    <div class="parchment">
+      <p class="section-title" style="margin-bottom:1.5rem;">Results for <em>"wyvern"</em> — 4 entries found</p>
+      <div class="search-result">
+        <h3 onclick="showPage('article')">Wyvern of Ashenhollow</h3>
+        <p>A fearsome draconic predator endemic to the volcanic highlands of the Ashenhollow region. Extremely dangerous; breath attack delivers toxic ash.</p>
+        <span class="tag">Bestiary</span> <span class="tag">Dragon-kin</span>
+      </div>
+      <div class="search-result">
+        <h3 onclick="showPage('article')">Wyvern Scale Armour</h3>
+        <p>Heavy armour crafted from the dorsal scales of an Ashenhollow Wyvern. Grants high fire resistance and a bonus to intimidation.</p>
+        <span class="tag">Equipment</span>
+      </div>
+      <div class="search-result">
+        <h3 onclick="showPage('article')">Wyvern Barb (Reagent)</h3>
+        <p>A paralytic alchemical reagent harvested from the tail barbs of a Wyvern. Key ingredient in the Serpent's Stasis potion.</p>
+        <span class="tag">Alchemy</span>
+      </div>
+      <div class="search-result">
+        <h3 onclick="showPage('article')">The Wyvern Rider of Keldrath (Lore)</h3>
+        <p>A historical account of the legendary Keldrath Wyvern Riders, an order of knights who bonded with juvenile wyverns in the Second Age.</p>
+        <span class="tag">Lore</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="site-title" style="color:var(--gold-bright);font-family:'Cinzel Decorative',serif;">The Chronicle</span>
+      <p>The official community wiki for <em>Your Game Title</em>. Built and maintained by players, for players. All lore and assets belong to their respective creators.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a onclick="showPage('category')">Bestiary</a></li>
+        <li><a onclick="showPage('category')">Weapons</a></li>
+        <li><a onclick="showPage('category')">Locations</a></li>
+        <li><a onclick="showPage('category')">Characters</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contribute</h4>
+      <ul>
+        <li><a href="#">Edit a Page</a></li>
+        <li><a href="#">Add Article</a></li>
+        <li><a href="#">Style Guide</a></li>
+        <li><a href="#">Report Error</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="#">Discord</a></li>
+        <li><a href="#">Reddit</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Changelog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    ⚜ &nbsp; The Chronicle Wiki &nbsp;·&nbsp; Made with 🗡 by the Community &nbsp;·&nbsp; Replace "Your Game Title" and publish &nbsp; ⚜
+  </div>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav.main-nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
