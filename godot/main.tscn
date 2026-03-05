@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://cyev0bp36gb2l"]
+
+[node name="Main" type="Control" unique_id=2075488724]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=932097383]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG_Back" type="ColorRect" parent="Panel" unique_id=1222140730]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.5529412, 0.5019608, 0.4, 1)
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1353405556]
+layout_mode = 2
+
+[node name="Top_Dir" type="PanelContainer" parent="Panel/VBox" unique_id=1713683323]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+
+[node name="BG_Dir" type="ColorRect" parent="Panel/VBox/Top_Dir" unique_id=1220520908]
+layout_mode = 2
+color = Color(0.4609375, 0.4177246, 0.33129883, 1)
+
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Top_Dir" unique_id=70544935]
+layout_mode = 2
+theme_override_constants/separation = 33
+alignment = 1
+
+[node name="Home" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1644007553]
+layout_mode = 2
+text = "Home"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="1" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=271648949]
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Items" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1286577027]
+layout_mode = 2
+text = "Items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1621331575]
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Abilities" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1373915615]
+layout_mode = 2
+text = "Abilities"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1057523089]
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Creatures" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1975500017]
+layout_mode = 2
+text = "Creatures"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="4" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=655907139]
+layout_mode = 2
+text = "|"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Profile" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=791485185]
+layout_mode = 2
+text = "Profile"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center" type="MarginContainer" parent="Panel/VBox" unique_id=198452156]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 111
+theme_override_constants/margin_top = 66
+theme_override_constants/margin_right = 111
+theme_override_constants/margin_bottom = 66
+
+[node name="BG_Center" type="ColorRect" parent="Panel/VBox/Center" unique_id=1062970211]
+layout_mode = 2
+color = Color(0.66796875, 0.6070862, 0.48532104, 1)
