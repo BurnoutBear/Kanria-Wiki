@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Game Wiki</title>
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'none';
+    style-src 'self' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self';
+    base-uri 'self';
+    form-action 'none';
+    object-src 'none';
+  " />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .not-found__code {
+      font-size: clamp(3rem, 10vw, 6rem);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .not-found__title {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .not-found__back {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.5em 1.2em;
+      border: 1px solid var(--border-hi);
+      border-radius: var(--radius);
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      transition: color 0.22s ease, border-color 0.22s ease;
+    }
+    .not-found__back:hover,
+    .not-found__back:focus-visible {
+      color: var(--accent);
+      border-color: var(--accent-dim);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell" style="grid-template-rows: auto 1fr auto;">
+    <header class="site-header" role="banner">
+      <div class="header-left">
+        <span class="site-tag">CODEX</span>
+        <h1 class="site-title">Game Wiki</h1><!-- ← match index.html -->
+      </div>
+    </header>
+    <main role="main">
+      <div class="not-found">
+        <p class="not-found__code">404</p>
+        <p class="not-found__title">Page not found</p>
+        <a href="/" class="not-found__back">← Return to wiki</a>
+      </div>
+    </main>
+    <footer class="site-footer" role="contentinfo">
+      <span class="footer-credit">Built with Godot &amp; GitHub Pages</span>
+    </footer>
+  </div>
+</body>
+</html>

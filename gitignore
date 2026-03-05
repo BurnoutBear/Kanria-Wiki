@@ -1,0 +1,16 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Godot export temp files
+# (keep the actual export output in wiki_export/)
+*.tmp
+*.log
+export_presets.cfg
