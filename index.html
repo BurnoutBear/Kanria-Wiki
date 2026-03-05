@@ -5,27 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Game Wiki</title><!-- ← Change to your game name -->
 
-  <!--
-    ══════════════════════════════════════════════════════════════════
-    CONTENT SECURITY POLICY
-    ══════════════════════════════════════════════════════════════════
-    Applied via <meta> because GitHub Pages cannot set HTTP headers.
-    Note: this CSP governs the WRAPPER page only. The iframe
-    (wiki_export/index.html) is a separate document with its own
-    policy context — Godot's eval/inline scripts are unaffected.
-
-    Directives:
-      default-src 'none'        — deny everything not explicitly allowed
-      script-src  'self'        — only our own .js files (no inline, no eval)
-      style-src   'self' https://fonts.googleapis.com
-      font-src    https://fonts.gstatic.com
-      img-src     'self' data:  — allow SVG data URIs used for the grain texture
-      frame-src   'self'        — iframe src must be same-origin (wiki_export/)
-      connect-src 'self'        — service worker fetches only
-      base-uri    'self'        — prevent <base href> injection attacks
-      form-action 'none'        — this page has no forms
-      object-src  'none'        — block Flash/plugins entirely
-  -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'none';
     script-src  'self';
@@ -38,150 +17,75 @@
     form-action 'none';
     object-src  'none';
   " />
-
-  <!-- Referrer: send origin only on same-origin, nothing cross-origin -->
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <!--
-    coi-serviceworker MUST be loaded before anything else.
-    It may trigger a single page reload to activate cross-origin isolation.
-    It contains its own infinite-reload guard via sessionStorage.
-  -->
   <script src="coi-serviceworker.js"></script>
 
-  <!--
-    Fonts — hosted by Google Fonts.
-    Fallback stacks defined in CSS so the layout never breaks if the
-    CDN is unavailable (offline use, strict firewalls, etc.).
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;600&family=DM+Mono:wght@300;400&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Crimson+Pro:wght@300;400&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/style.css" />
 </head>
-
 <body>
 
-  <div class="shell">
+  <div class="page">
 
-    <!-- ── Header ─────────────────────────────────────────────────── -->
-    <header class="site-header" role="banner">
-      <div class="header-left">
-        <span class="site-tag">CODEX</span>
-        <!--  ↓ Change this to your game/wiki name  -->
-        <h1 class="site-title">Game Wiki</h1>
-      </div>
-      <div class="header-right">
-        <button
-          id="fullscreen-btn"
-          class="icon-btn"
-          title="Enter fullscreen"
-          aria-label="Toggle fullscreen"
-          aria-pressed="false"
-        >
-          <!--
-            Inline SVG is allowed by CSP because it's markup, not script.
-            It is hardcoded here — never built from user input.
-          -->
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
-            <path d="M1 1h4M1 1v4M15 1h-4M15 1v4M1 15h4M1 15v-4M15 15h-4M15 15v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
+    <header class="page__header">
+      <h1 class="page__title">Game Wiki</h1><!-- ← Change to your game name -->
+      <p class="page__sub">Codex &amp; Compendium</p>
     </header>
 
-    <!-- ── Main stage ──────────────────────────────────────────────── -->
-    <main class="stage" role="main">
-      <div class="frame-border" id="frame-container">
+    <div class="frame-wrap" id="frame-container">
 
-        <!-- Corner ornaments (pure CSS/HTML, no JS) -->
-        <span class="corner corner--tl" aria-hidden="true"></span>
-        <span class="corner corner--tr" aria-hidden="true"></span>
-        <span class="corner corner--bl" aria-hidden="true"></span>
-        <span class="corner corner--br" aria-hidden="true"></span>
-
-        <!-- ── Loading overlay ──────────────────────────────────── -->
-        <div class="loader" id="loader" role="status" aria-live="polite">
-          <div class="loader-symbol" aria-hidden="true">◈</div>
-          <p class="loader-text">Initialising…</p>
-          <div class="progress-track" aria-hidden="true">
-            <div class="progress-sweep"></div>
-          </div>
-        </div>
-
-        <!-- ── Error panel (hidden until needed) ────────────────── -->
-        <div class="error-panel" id="error-panel" hidden aria-hidden="true" role="alert">
-          <p class="error-icon" aria-hidden="true">⚠</p>
-          <p id="loader-message" class="error-message">Wiki export not found.</p>
-          <p class="error-hint">
-            Export the Godot wiki project to <code>wiki_export/</code> and push to GitHub.
-          </p>
-        </div>
-
-        <!--
-          ── The wiki iframe ───────────────────────────────────────
-          src is set by main.js (after listeners are attached) to
-          guarantee the load event is never missed on fast connections.
-
-          Security attributes:
-            allow="fullscreen; pointer-lock"
-              Only grant the specific permissions Godot needs.
-              pointer-lock: mouse capture for first-person controls.
-              fullscreen: Godot's own fullscreen button.
-              We deliberately omit payment, camera, microphone, etc.
-
-            referrerpolicy="no-referrer"
-              Don't leak the parent URL to the framed document.
-
-          Why no `sandbox` attribute:
-            Godot web exports require same-origin access for:
-              - Service Workers (save data via IndexedDB)
-              - SharedArrayBuffer (threading, via COOP/COEP headers)
-            `sandbox` without `allow-same-origin` would isolate the
-            frame into a unique origin, breaking both of the above.
-            `sandbox` with `allow-same-origin allow-scripts` would
-            re-grant the origin but still block pointer-lock and other
-            APIs Godot uses. The threat model here is a trusted
-            same-origin Godot export, so sandbox adds no benefit.
-        -->
-        <iframe
-          id="wiki-frame"
-          aria-hidden="true"
-          aria-label="Game wiki"
-          title="Game wiki"
-          allow="fullscreen; pointer-lock"
-          referrerpolicy="no-referrer"
-          allowfullscreen
-        ></iframe>
-        <!-- src intentionally omitted here — set by main.js -->
-
+      <div class="loader" id="loader" role="status" aria-live="polite">
+        <div class="loader__ring" aria-hidden="true"></div>
+        <p class="loader__text">Opening the tome…</p>
       </div>
-    </main>
 
-    <!-- ── Footer ──────────────────────────────────────────────────── -->
-    <footer class="site-footer" role="contentinfo">
-      <span class="footer-credit">Built with Godot &amp; GitHub Pages</span>
+      <div class="error-panel" id="error-panel" hidden aria-hidden="true" role="alert">
+        <p class="error-panel__icon" aria-hidden="true">⚠</p>
+        <p id="loader-message" class="error-panel__msg">Wiki export not found.</p>
+        <p class="error-panel__hint">Export the Godot wiki to <code>wiki_export/</code> and push.</p>
+      </div>
+
       <!--
-        rel="noopener noreferrer":
-          noopener    — new tab cannot access window.opener (clickjacking)
-          noreferrer  — also suppresses the Referer header
+        src set by main.js after load listener is attached.
+        allow="fullscreen; pointer-lock" — minimum permissions for Godot.
+        No sandbox: Godot needs same-origin for IndexedDB + SharedArrayBuffer.
       -->
-      <a
-        href="https://github.com/YOUR_USERNAME/YOUR_WIKI_REPO"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="footer-link"
-      >Source ↗</a>
+      <iframe
+        id="wiki-frame"
+        aria-hidden="true"
+        title="Game wiki"
+        allow="fullscreen; pointer-lock"
+        referrerpolicy="no-referrer"
+        allowfullscreen
+      ></iframe>
+
+      <button
+        id="fullscreen-btn"
+        class="fullscreen-btn"
+        title="Enter fullscreen"
+        aria-label="Toggle fullscreen"
+        aria-pressed="false"
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <path d="M1 1h4M1 1v4M15 1h-4M15 1v4M1 15h4M1 15v-4M15 15h-4M15 15v-4"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <footer class="page__footer">
+      Built with Godot &amp; GitHub Pages ·
+      <a href="https://github.com/YOUR_USERNAME/YOUR_WIKI_REPO"
+         target="_blank" rel="noopener noreferrer">Source ↗</a>
     </footer>
 
-  </div><!-- /.shell -->
+  </div>
 
-  <!-- All JS in external file — required by script-src 'self' CSP -->
   <script src="assets/main.js"></script>
-
 </body>
 </html>
