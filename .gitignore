@@ -1,24 +1,16 @@
-dist
-dist-*
-cabal-dev
-*.o
-*.hi
-*.hie
-*.chi
-*.chs.h
-*.dyn_o
-*.dyn_hi
-.hpc
-.hsenv
-.cabal-sandbox/
-cabal.sandbox.config
-*.prof
-*.aux
-*.hp
-*.eventlog
-.stack-work/
-cabal.project.local
-cabal.project.local~
-.HTF/
-.ghc.environment.*
-/godot/.godot
+# Godot 4+ specific ignores
+godot/.godot/
+godot/.nomedia
+
+# Godot-specific ignores
+godot/.import/
+godot/export.cfg
+godot/export_credentials.cfg
+
+# Imported translations (automatically generated from CSV files)
+godot/*.translation
+
+# Mono-specific ignores
+godot/.mono/
+godot/data_*/
+godot/mono_crash.*.json
