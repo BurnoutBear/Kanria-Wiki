@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://cyev0bp36gb2l"]
 
-[ext_resource type="Script" uid="uid://cfyskewqe374w" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cfyskewqe374w" path="res://wiki.gd" id="1_dec6d"]
 
-[node name="Main" type="Control" unique_id=2075488724]
+[node name="Root" type="Control" unique_id=902155951]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ig7tw")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_dec6d")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=932097383]
 layout_mode = 1
