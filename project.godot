@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Wiki"
+run/main_scene="uid://cyev0bp36gb2l"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -25,3 +26,4 @@ project/assembly_name="godot"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
