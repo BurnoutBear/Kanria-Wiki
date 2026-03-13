@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c1sp2k7fspmkc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0e0q"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0.24705882)
+
+[sub_resource type="SyntaxHighlighter" id="SyntaxHighlighter_j0e0q"]
+
+[node name="root" type="MarginContainer" unique_id=1715328465]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1552842180]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBox" unique_id=1405178592]
+layout_mode = 2
+text = "Entry name"
+
+[node name="TextEdit" type="TextEdit" parent="VBox" unique_id=449222588]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_j0e0q")
+text = "Entry description"
+backspace_deletes_composite_character_enabled = true
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+syntax_highlighter = SubResource("SyntaxHighlighter_j0e0q")

@@ -13,7 +13,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_dec6d")
 
-[node name="Panel" type="PanelContainer" parent="." unique_id=932097383]
+[node name="All" type="PanelContainer" parent="." unique_id=932097383]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,89 +21,269 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BG_Back" type="ColorRect" parent="Panel" unique_id=1222140730]
+[node name="Zones" type="VBoxContainer" parent="All" unique_id=1353405556]
 layout_mode = 2
-size_flags_vertical = 3
-color = Color(0.5529412, 0.5019608, 0.4, 1)
+theme_override_constants/separation = 0
 
-[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1353405556]
-layout_mode = 2
-
-[node name="Top_Dir" type="PanelContainer" parent="Panel/VBox" unique_id=1713683323]
+[node name="Top" type="PanelContainer" parent="All/Zones" unique_id=1713683323]
 custom_minimum_size = Vector2(0, 33)
 layout_mode = 2
 
-[node name="BG_Dir" type="ColorRect" parent="Panel/VBox/Top_Dir" unique_id=1220520908]
+[node name="BG_Top" type="ColorRect" parent="All/Zones/Top" unique_id=1220520908]
 layout_mode = 2
-color = Color(0.4609375, 0.4177246, 0.33129883, 1)
+color = Color(0.40784314, 0.3647059, 0.2784314, 1)
 
-[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Top_Dir" unique_id=70544935]
+[node name="List" type="HBoxContainer" parent="All/Zones/Top" unique_id=70544935]
 layout_mode = 2
 theme_override_constants/separation = 33
 alignment = 1
 
-[node name="Home" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1644007553]
+[node name="Home" type="Label" parent="All/Zones/Top/List" unique_id=1644007553]
 layout_mode = 2
 text = "Home"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="1" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=271648949]
+[node name="1" type="Label" parent="All/Zones/Top/List" unique_id=271648949]
 layout_mode = 2
 text = "|"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Items" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1286577027]
+[node name="Search" type="Label" parent="All/Zones/Top/List" unique_id=1975500017]
 layout_mode = 2
-text = "Items"
+text = "Search"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="2" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1621331575]
-layout_mode = 2
-text = "|"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Abilities" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1373915615]
-layout_mode = 2
-text = "Abilities"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="3" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1057523089]
+[node name="2" type="Label" parent="All/Zones/Top/List" unique_id=1621331575]
 layout_mode = 2
 text = "|"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Creatures" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=1975500017]
+[node name="Forum" type="Label" parent="All/Zones/Top/List" unique_id=791485185]
 layout_mode = 2
-text = "Creatures"
+text = "Forum"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="4" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=655907139]
+[node name="3" type="Label" parent="All/Zones/Top/List" unique_id=655907139]
 layout_mode = 2
 text = "|"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Profile" type="Label" parent="Panel/VBox/Top_Dir/HBox" unique_id=791485185]
+[node name="Community" type="Label" parent="All/Zones/Top/List" unique_id=1286577027]
 layout_mode = 2
-text = "Profile"
+text = "Community"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Center" type="MarginContainer" parent="Panel/VBox" unique_id=198452156]
+[node name="Center" type="PanelContainer" parent="All/Zones" unique_id=490514193]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 111
+
+[node name="BG_Center" type="ColorRect" parent="All/Zones/Center" unique_id=1222140730]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.5529412, 0.5019608, 0.4, 1)
+
+[node name="Zones" type="HBoxContainer" parent="All/Zones/Center" unique_id=1414641954]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Left" type="PanelContainer" parent="All/Zones/Center/Zones" unique_id=891809382]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="BG_Left" type="ColorRect" parent="All/Zones/Center/Zones/Left" unique_id=1307774288]
+layout_mode = 2
+color = Color(0.4627451, 0.41960785, 0.32941177, 1)
+
+[node name="Margin" type="MarginContainer" parent="All/Zones/Center/Zones/Left" unique_id=98677310]
+layout_mode = 2
+theme_override_constants/margin_left = 33
 theme_override_constants/margin_top = 66
-theme_override_constants/margin_right = 111
+theme_override_constants/margin_right = 33
 theme_override_constants/margin_bottom = 66
 
-[node name="BG_Center" type="ColorRect" parent="Panel/VBox/Center" unique_id=1062970211]
+[node name="Navigation" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin" unique_id=476250815]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="PanelContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation" unique_id=1315015741]
+layout_mode = 2
+
+[node name="BG_Title" type="ColorRect" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Title" unique_id=1003106984]
+layout_mode = 2
+color = Color(0.30980393, 0.27450982, 0.20784314, 1)
+
+[node name="Navigate" type="Label" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Title" unique_id=1177706865]
+layout_mode = 2
+text = "  Navigate"
+vertical_alignment = 1
+
+[node name="Body" type="PanelContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation" unique_id=1573288105]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body" unique_id=471780853]
+layout_mode = 2
+color = Color(0.40784314, 0.3647059, 0.2784314, 1)
+
+[node name="Margin" type="MarginContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body" unique_id=920319814]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
+
+[node name="List" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin" unique_id=790924972]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Items" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1053222709]
+layout_mode = 2
+
+[node name="Armors" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=984636434]
+layout_mode = 2
+text = "Armors"
+underline = 1
+
+[node name="Weapons" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=1053243525]
+layout_mode = 2
+text = "Weapons"
+underline = 1
+
+[node name="Tools" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=456642266]
+layout_mode = 2
+text = "Tools"
+underline = 1
+
+[node name="Quest Items" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=2102792109]
+layout_mode = 2
+text = "Quest Items"
+underline = 1
+
+[node name="Abilities" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1032492556]
+layout_mode = 2
+
+[node name="Skills" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities" unique_id=1435018834]
+layout_mode = 2
+text = "Skills"
+underline = 1
+
+[node name="Magic" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities" unique_id=1155115321]
+layout_mode = 2
+text = "Magic"
+underline = 1
+
+[node name="Entities" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1714860272]
+layout_mode = 2
+
+[node name="NPCs" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=1363169941]
+layout_mode = 2
+text = "NPCs"
+underline = 1
+
+[node name="Mobs" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=748163629]
+layout_mode = 2
+text = "Mobs"
+underline = 1
+
+[node name="Animals" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=1573863133]
+layout_mode = 2
+text = "Animals"
+underline = 1
+
+[node name="Areas" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1926173017]
+layout_mode = 2
+
+[node name="Maps" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas" unique_id=1843623079]
+layout_mode = 2
+text = "Maps"
+underline = 1
+
+[node name="Dungeons" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas" unique_id=244354005]
+layout_mode = 2
+text = "Dungeons"
+underline = 1
+
+[node name="Middle" type="PanelContainer" parent="All/Zones/Center/Zones" unique_id=790486542]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BG_Middle" type="ColorRect" parent="All/Zones/Center/Zones/Middle" unique_id=1062970211]
 layout_mode = 2
 color = Color(0.66796875, 0.6070862, 0.48532104, 1)
+
+[node name="Margin" type="MarginContainer" parent="All/Zones/Center/Zones/Middle" unique_id=1096346003]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 33
+theme_override_constants/margin_top = 33
+theme_override_constants/margin_right = 33
+theme_override_constants/margin_bottom = 33
+
+[node name="Right" type="PanelContainer" parent="All/Zones/Center/Zones" unique_id=154917196]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="BG_Right" type="ColorRect" parent="All/Zones/Center/Zones/Right" unique_id=1531267734]
+layout_mode = 2
+color = Color(0.4627451, 0.41960785, 0.32941177, 1)
+
+[node name="Margin" type="MarginContainer" parent="All/Zones/Center/Zones/Right" unique_id=1554405434]
+layout_mode = 2
+theme_override_constants/margin_left = 33
+theme_override_constants/margin_top = 66
+theme_override_constants/margin_right = 33
+theme_override_constants/margin_bottom = 66
+
+[node name="ColorRect" type="ColorRect" parent="All/Zones/Center/Zones/Right/Margin" unique_id=87399848]
+layout_mode = 2
+color = Color(0.40784314, 0.3647059, 0.2784314, 1)
+
+[node name="List" type="VBoxContainer" parent="All/Zones/Center/Zones/Right/Margin" unique_id=1660529976]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="PanelContainer" parent="All/Zones/Center/Zones/Right/Margin/List" unique_id=1358371999]
+layout_mode = 2
+
+[node name="BG_Title" type="ColorRect" parent="All/Zones/Center/Zones/Right/Margin/List/Title" unique_id=1707838412]
+layout_mode = 2
+color = Color(0.30980393, 0.27450982, 0.20784314, 1)
+
+[node name="Recent" type="Label" parent="All/Zones/Center/Zones/Right/Margin/List/Title" unique_id=1724444734]
+layout_mode = 2
+text = "  Recently updated"
+vertical_alignment = 1
+
+[node name="Example" type="Label" parent="All/Zones/Center/Zones/Right/Margin/List" unique_id=208697375]
+layout_mode = 2
+text = "  Example"
+
+[node name="Bottom" type="PanelContainer" parent="All/Zones" unique_id=1656833877]
+layout_mode = 2
+
+[node name="BG_Bottom" type="ColorRect" parent="All/Zones/Bottom" unique_id=2013334200]
+layout_mode = 2
+color = Color(0.40784314, 0.3647059, 0.2784314, 1)
+
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Armors" to="." method="NavigationButtonPressed" binds= ["Armors"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Weapons" to="." method="NavigationButtonPressed" binds= ["Weapons"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Tools" to="." method="NavigationButtonPressed" binds= ["Tools"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Quest Items" to="." method="NavigationButtonPressed" binds= ["Quest Items"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities/Skills" to="." method="NavigationButtonPressed" binds= ["Skills"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities/Magic" to="." method="NavigationButtonPressed" binds= ["magic"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/NPCs" to="." method="NavigationButtonPressed" binds= ["NPCs"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/Mobs" to="." method="NavigationButtonPressed" binds= ["Mobs"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/Animals" to="." method="NavigationButtonPressed" binds= ["Animals"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas/Maps" to="." method="NavigationButtonPressed" binds= ["Maps"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas/Dungeons" to="." method="NavigationButtonPressed" binds= ["Dungeons"]]
