@@ -117,10 +117,6 @@ theme_override_constants/separation = 0
 [node name="Title" type="PanelContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation" unique_id=1315015741]
 layout_mode = 2
 
-[node name="BG_Title" type="ColorRect" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Title" unique_id=1003106984]
-layout_mode = 2
-color = Color(0.30980393, 0.27450982, 0.20784314, 1)
-
 [node name="Navigate" type="Label" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Title" unique_id=1177706865]
 layout_mode = 2
 text = "  Navigate"
@@ -255,10 +251,6 @@ theme_override_constants/separation = 15
 
 [node name="Title" type="PanelContainer" parent="All/Zones/Center/Zones/Right/Margin/List" unique_id=1358371999]
 layout_mode = 2
-
-[node name="BG_Title" type="ColorRect" parent="All/Zones/Center/Zones/Right/Margin/List/Title" unique_id=1707838412]
-layout_mode = 2
-color = Color(0.30980393, 0.27450982, 0.20784314, 1)
 
 [node name="Recent" type="Label" parent="All/Zones/Center/Zones/Right/Margin/List/Title" unique_id=1724444734]
 layout_mode = 2
