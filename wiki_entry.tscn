@@ -4,10 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://doqgh5t20m6np" path="res://Save.svg" id="2_m3phh"]
 [ext_resource type="Texture2D" uid="uid://dargm1fnl7rdh" path="res://Cancel.svg" id="3_4lsjr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46e26"]
-bg_color = Color(0.30980393, 0.27450982, 0.20784314, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0e0q"]
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 6.0
+content_margin_bottom = 9.0
 bg_color = Color(0.74509805, 0.68235296, 0.54509807, 1)
 border_color = Color(0.8, 0.8, 0.8, 0.24705882)
 
@@ -19,7 +20,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lsjr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="root" type="MarginContainer" unique_id=1715328465]
+[node name="Entry Name" type="MarginContainer" unique_id=1715328465]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,19 +34,15 @@ script = ExtResource("1_gfh5o")
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Title" type="Label" parent="VBox" unique_id=1405178592]
+[node name="Name" type="Label" parent="VBox" unique_id=450209124]
 custom_minimum_size = Vector2(0, 33)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_46e26")
-text = "  Entry name"
-vertical_alignment = 1
-autowrap_mode = 3
+text = "Entry name"
 
 [node name="Description" type="TextEdit" parent="VBox" unique_id=449222588]
-custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_j0e0q")
-text = "  Entry description"
+text = "Entry description"
 backspace_deletes_composite_character_enabled = true
 wrap_mode = 1
 tab_input_mode = false

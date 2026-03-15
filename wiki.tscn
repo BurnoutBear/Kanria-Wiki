@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cyev0bp36gb2l"]
 
 [ext_resource type="Script" uid="uid://cfyskewqe374w" path="res://wiki.gd" id="1_dec6d"]
+[ext_resource type="PackedScene" uid="uid://c1sp2k7fspmkc" path="res://wiki_entry.tscn" id="2_7jlhl"]
 
 [node name="Root" type="Control" unique_id=902155951]
 layout_mode = 3
@@ -117,9 +118,9 @@ theme_override_constants/separation = 0
 [node name="Title" type="PanelContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation" unique_id=1315015741]
 layout_mode = 2
 
-[node name="Navigate" type="Label" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Title" unique_id=1177706865]
+[node name="Navigation" type="Label" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Title" unique_id=1177706865]
 layout_mode = 2
-text = "  Navigate"
+text = "  Navigation"
 vertical_alignment = 1
 
 [node name="Body" type="PanelContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation" unique_id=1573288105]
@@ -141,72 +142,80 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_constants/separation = 15
 
+[node name="Abilities" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1032492556]
+layout_mode = 2
+
+[node name="Magic" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities" unique_id=1155115321]
+layout_mode = 2
+text = "Magic"
+
+[node name="Skills" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities" unique_id=1435018834]
+layout_mode = 2
+text = "Skills"
+
+[node name="Entities" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1714860272]
+layout_mode = 2
+
+[node name="Animals" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=1573863133]
+layout_mode = 2
+text = "Animals"
+
+[node name="Mobs" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=748163629]
+layout_mode = 2
+text = "Mobs"
+
+[node name="NPCs" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=1363169941]
+layout_mode = 2
+text = "NPCs"
+
+[node name="Gameplay" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=281214371]
+layout_mode = 2
+
+[node name="Challenges" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay" unique_id=1930987936]
+layout_mode = 2
+text = "Challenges"
+
+[node name="Quests" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay" unique_id=679431995]
+layout_mode = 2
+text = "Quests"
+
+[node name="Puzzles" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay" unique_id=1189858154]
+layout_mode = 2
+text = "Puzzles"
+
+[node name="Random Events" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay" unique_id=1083279174]
+layout_mode = 2
+text = "Random Events"
+
 [node name="Items" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1053222709]
 layout_mode = 2
 
 [node name="Armors" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=984636434]
 layout_mode = 2
 text = "Armors"
-underline = 1
-
-[node name="Weapons" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=1053243525]
-layout_mode = 2
-text = "Weapons"
-underline = 1
-
-[node name="Tools" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=456642266]
-layout_mode = 2
-text = "Tools"
-underline = 1
 
 [node name="Quest Items" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=2102792109]
 layout_mode = 2
 text = "Quest Items"
-underline = 1
 
-[node name="Abilities" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1032492556]
+[node name="Tools" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=456642266]
+layout_mode = 2
+text = "Tools"
+
+[node name="Weapons" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items" unique_id=1053243525]
+layout_mode = 2
+text = "Weapons"
+
+[node name="Zones" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1926173017]
 layout_mode = 2
 
-[node name="Skills" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities" unique_id=1435018834]
-layout_mode = 2
-text = "Skills"
-underline = 1
-
-[node name="Magic" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities" unique_id=1155115321]
-layout_mode = 2
-text = "Magic"
-underline = 1
-
-[node name="Entities" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1714860272]
-layout_mode = 2
-
-[node name="NPCs" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=1363169941]
-layout_mode = 2
-text = "NPCs"
-underline = 1
-
-[node name="Mobs" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=748163629]
-layout_mode = 2
-text = "Mobs"
-underline = 1
-
-[node name="Animals" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities" unique_id=1573863133]
-layout_mode = 2
-text = "Animals"
-underline = 1
-
-[node name="Areas" type="VBoxContainer" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List" unique_id=1926173017]
-layout_mode = 2
-
-[node name="Maps" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas" unique_id=1843623079]
-layout_mode = 2
-text = "Maps"
-underline = 1
-
-[node name="Dungeons" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas" unique_id=244354005]
+[node name="Dungeons" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Zones" unique_id=244354005]
 layout_mode = 2
 text = "Dungeons"
-underline = 1
+
+[node name="Maps" type="LinkButton" parent="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Zones" unique_id=1843623079]
+layout_mode = 2
+text = "Maps"
 
 [node name="Middle" type="PanelContainer" parent="All/Zones/Center/Zones" unique_id=790486542]
 layout_mode = 2
@@ -225,6 +234,37 @@ theme_override_constants/margin_left = 33
 theme_override_constants/margin_top = 33
 theme_override_constants/margin_right = 33
 theme_override_constants/margin_bottom = 33
+
+[node name="Eg Cat Page" type="ScrollContainer" parent="All/Zones/Center/Zones/Middle/Margin" unique_id=1336510480]
+layout_mode = 2
+
+[node name="List" type="VBoxContainer" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page" unique_id=1357375065]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Refs" type="VBoxContainer" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=828767051]
+layout_mode = 2
+
+[node name="Eg Cat Name" type="Label" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=2033622933]
+layout_mode = 2
+
+[node name="Entry Link" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=1655433950]
+layout_mode = 2
+
+[node name="Entry Link2" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=1304514843]
+layout_mode = 2
+
+[node name="Etc" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=1154566776]
+layout_mode = 2
+
+[node name="Entry Name" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=1715328465 instance=ExtResource("2_7jlhl")]
+layout_mode = 2
+
+[node name="Entry Name2" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=820776385 instance=ExtResource("2_7jlhl")]
+layout_mode = 2
+
+[node name="Etc" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=1462049159 instance=ExtResource("2_7jlhl")]
+layout_mode = 2
 
 [node name="Right" type="PanelContainer" parent="All/Zones/Center/Zones" unique_id=154917196]
 custom_minimum_size = Vector2(240, 0)
@@ -268,14 +308,18 @@ layout_mode = 2
 layout_mode = 2
 color = Color(0.40784314, 0.3647059, 0.2784314, 1)
 
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Armors" to="." method="NavigationButtonPressed" binds= ["Armors"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Weapons" to="." method="NavigationButtonPressed" binds= ["Weapons"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Tools" to="." method="NavigationButtonPressed" binds= ["Tools"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Quest Items" to="." method="NavigationButtonPressed" binds= ["Quest Items"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities/Skills" to="." method="NavigationButtonPressed" binds= ["Skills"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities/Magic" to="." method="NavigationButtonPressed" binds= ["magic"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/NPCs" to="." method="NavigationButtonPressed" binds= ["NPCs"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/Mobs" to="." method="NavigationButtonPressed" binds= ["Mobs"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/Animals" to="." method="NavigationButtonPressed" binds= ["Animals"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas/Maps" to="." method="NavigationButtonPressed" binds= ["Maps"]]
-[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Areas/Dungeons" to="." method="NavigationButtonPressed" binds= ["Dungeons"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities/Magic" to="." method="ShowCategory" binds= ["Magic"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Abilities/Skills" to="." method="ShowCategory" binds= ["Skills"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/Animals" to="." method="ShowCategory" binds= ["Animals"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/Mobs" to="." method="ShowCategory" binds= ["Mobs"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Entities/NPCs" to="." method="ShowCategory" binds= ["NPCs"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay/Challenges" to="." method="ShowCategory" binds= ["Challenges"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay/Quests" to="." method="ShowCategory" binds= ["Quests"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay/Puzzles" to="." method="ShowCategory" binds= ["Puzzles"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Gameplay/Random Events" to="." method="ShowCategory" binds= ["Random Events"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Armors" to="." method="ShowCategory" binds= ["Armors"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Quest Items" to="." method="ShowCategory" binds= ["Quest Items"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Tools" to="." method="ShowCategory" binds= ["Tools"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Items/Weapons" to="." method="ShowCategory" binds= ["Weapons"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Zones/Dungeons" to="." method="ShowCategory" binds= ["Dungeons"]]
+[connection signal="pressed" from="All/Zones/Center/Zones/Left/Margin/Navigation/Body/Margin/List/Zones/Maps" to="." method="ShowCategory" binds= ["Maps"]]
