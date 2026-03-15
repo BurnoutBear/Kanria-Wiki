@@ -36,14 +36,15 @@ func PopulateCategories():
 				## Add refs
 				var ref : LinkButton = LinkButton.new()
 				refs.add_child(ref)
-				ref.text = "Entry Name" + " " + category_name.text + " " + str(i)
+				ref.text = category_name.text + " " + str(i)
 				ref.pressed.connect(ShowEntry.bind(ref.text))
 				## Add entries
 				var entry = wiki_entry.instantiate()
 				list.add_child(entry)
-				entry.name = "Entry Name" + " " + category_name.text + " " + str(i)
-				entry.entry_name.text = category.text
+				entry.name = category_name.text + " " + str(i)
+				entry.entry_name.text = entry.name
 				entry.entry_desc.text = "Description subscription"
+				entry.old_desc = entry.entry_desc.text
 				#entry.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				#entry.get_child(0).size_flags_horizontal = Control.SIZE_EXPAND_FILL
 

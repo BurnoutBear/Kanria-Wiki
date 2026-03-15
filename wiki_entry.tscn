@@ -38,6 +38,8 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(0, 33)
 layout_mode = 2
 text = "Entry name"
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Description" type="TextEdit" parent="VBox" unique_id=449222588]
 layout_mode = 2

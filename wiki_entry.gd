@@ -8,7 +8,6 @@ var old_desc : String
 var editing : bool
 
 func _ready():
-	old_desc = entry_desc.text
 	editing = false
 	save.visible = false
 	cancel.visible = false
