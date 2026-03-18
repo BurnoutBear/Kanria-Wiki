@@ -8,6 +8,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 432.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -39,11 +41,10 @@ layout_mode = 2
 theme_override_constants/separation = 33
 alignment = 1
 
-[node name="Home" type="Label" parent="All/Zones/Top/List" unique_id=1644007553]
+[node name="Home" type="LinkButton" parent="All/Zones/Top/List" unique_id=1839568057]
 layout_mode = 2
 text = "Home"
-horizontal_alignment = 1
-vertical_alignment = 1
+underline = 2
 
 [node name="1" type="Label" parent="All/Zones/Top/List" unique_id=271648949]
 layout_mode = 2
@@ -235,35 +236,35 @@ theme_override_constants/margin_top = 33
 theme_override_constants/margin_right = 33
 theme_override_constants/margin_bottom = 33
 
-[node name="Eg Cat Page" type="ScrollContainer" parent="All/Zones/Center/Zones/Middle/Margin" unique_id=1336510480]
+[node name="Example Page" type="ScrollContainer" parent="All/Zones/Center/Zones/Middle/Margin" unique_id=1336510480]
 layout_mode = 2
 
-[node name="List" type="VBoxContainer" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page" unique_id=1357375065]
+[node name="List" type="VBoxContainer" parent="All/Zones/Center/Zones/Middle/Margin/Example Page" unique_id=1357375065]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Refs" type="VBoxContainer" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=828767051]
+[node name="Refs" type="VBoxContainer" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List" unique_id=828767051]
 layout_mode = 2
 
-[node name="Eg Cat Name" type="Label" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=2033622933]
+[node name="Example Name" type="Label" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List/Refs" unique_id=2033622933]
 layout_mode = 2
 
-[node name="Entry Link" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=1655433950]
+[node name="Entry Link" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List/Refs" unique_id=1655433950]
 layout_mode = 2
 
-[node name="Entry Link2" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=1304514843]
+[node name="Entry Link2" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List/Refs" unique_id=1304514843]
 layout_mode = 2
 
-[node name="Etc" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List/Refs" unique_id=1154566776]
+[node name="Etc" type="LinkButton" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List/Refs" unique_id=1154566776]
 layout_mode = 2
 
-[node name="Entry Name" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=1715328465 instance=ExtResource("2_7jlhl")]
+[node name="Entry Name" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List" unique_id=1715328465 instance=ExtResource("2_7jlhl")]
 layout_mode = 2
 
-[node name="Entry Name2" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=820776385 instance=ExtResource("2_7jlhl")]
+[node name="Entry Name2" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List" unique_id=820776385 instance=ExtResource("2_7jlhl")]
 layout_mode = 2
 
-[node name="Etc" parent="All/Zones/Center/Zones/Middle/Margin/Eg Cat Page/List" unique_id=1462049159 instance=ExtResource("2_7jlhl")]
+[node name="Etc" parent="All/Zones/Center/Zones/Middle/Margin/Example Page/List" unique_id=1462049159 instance=ExtResource("2_7jlhl")]
 layout_mode = 2
 
 [node name="Right" type="PanelContainer" parent="All/Zones/Center/Zones" unique_id=154917196]

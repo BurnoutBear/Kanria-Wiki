@@ -11,10 +11,10 @@ func _ready():
 	PopulateCategories()
 
 func PopulateCategories():
-	## Remove "Eg Cat Page" (used to visualize how the wiki is populated)
+	## Remove "Example Page" (used to visualize how the wiki is populated)
 	category_displayer.get_child(0).queue_free()
 	
-	## Populate categories w/ DB entries (see "Eg Cat Page" for example structure)
+	## Populate categories w/ DB entries (see "Example Page" for example structure)
 	for group in category_list.get_children():
 		for category in group.get_children():
 			var page : ScrollContainer = ScrollContainer.new()
