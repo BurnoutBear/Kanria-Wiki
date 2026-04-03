@@ -15,13 +15,18 @@ run/main_scene="uid://cyev0bp36gb2l"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1720
+window/size/viewport_height=880
+
 [dotnet]
 
 project/assembly_name="godot"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/code_recall/plugin.cfg")
+enabled=PackedStringArray()
 
 [physics]
 
